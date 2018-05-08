@@ -168,7 +168,7 @@ public class Main {
         //function invoked from choosing menu option 4
         private static void menuExit() { System.exit(0); }
 
-        
+
 
         private static void menuTest()
         {
@@ -206,10 +206,7 @@ public class Main {
 
                                 chosenQuestions[i] = new question(question, option1, option2, option3, option4, answer);
                                 chosenAlready[i] = n;
-
-                                System.out.println(question);
-
-
+                                
                             } catch (NullPointerException e) { }
                         }
 
