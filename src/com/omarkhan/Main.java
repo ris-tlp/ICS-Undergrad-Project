@@ -3,9 +3,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import java.util.Random;
 
 
 public class Main {
+
+    public static student[] stud = new student[5];
+    public static question[] bank = new question[95];
 
     public static Scanner scanner = new Scanner(System.in);
 
@@ -24,8 +28,7 @@ public class Main {
             qs = new Scanner (new File("Testbank.txt")).useDelimiter((Pattern.compile(("^\\s*$"), Pattern.MULTILINE)));
         } catch (FileNotFoundException e) {}
 
-        student[] stud = new student[5];
-        question[] bank = new question[95];
+
 
         //reading questions from question bank
         for (int i = 0; i < bank.length; i++)
@@ -123,7 +126,7 @@ public class Main {
             {
                 case 1:
                     System.out.println("You have chosen to take a test.");
-                    //call test function
+                    menuTest();
                     break;
 
                 case 2:
@@ -152,6 +155,7 @@ public class Main {
 
         }
 
+        //function invoked to check if the input from user is valid
         private static boolean menuValidity(boolean flag)
         {
             while (!flag) {
@@ -161,5 +165,37 @@ public class Main {
             return true;
         }
 
+        //function invoked from choosing menu option 4
         private static void menuExit() { System.exit(0); }
+
+        private static void menuTest()
+        {
+            question[] chosenQuestions = new question[10];
+
+            for (int i = 0; i < chosenQuestions.length; i++)
+            {
+                //selecting random number to refer in question bank
+                Random rand = new Random();
+                int n = rand.nextInt(50) + 1;
+
+                //array to store the question number so same question doesn't appear twice
+                int[] chosenAlready = new int[10];
+
+
+                //NOPE SCREW THAT THAT'S SO WRONG HOT DAMN DUDE HOW YOU SO BAD
+                //DAMN NP YO WE GON GET UP TOMORROW AND DO THIS AGAIN
+                for (int k = 0; k < 10; k++)
+                {
+                    //checking if the question number has already been selected
+                    if(!(chosenAlready[k] == n))
+                    {
+                        //first storing question with options and answer in array
+                        chosenQuestions[i] = bank[n];
+                        //storing randomly selected question number in array to prevent same question appearing twice
+                        chosenAlready[i] = n;
+                    }
+                }
+
+            }
+        }
 }
