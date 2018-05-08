@@ -172,30 +172,39 @@ public class Main {
         {
             question[] chosenQuestions = new question[10];
 
+            //array to store the question number so same question doesn't appear twice
+            int[] chosenAlready = new int[10];
+
             for (int i = 0; i < chosenQuestions.length; i++)
             {
                 //selecting random number to refer in question bank
-                Random rand = new Random();
-                int n = rand.nextInt(50) + 1;
-
-                //array to store the question number so same question doesn't appear twice
-                int[] chosenAlready = new int[10];
 
 
-                //NOPE SCREW THAT THAT'S SO WRONG HOT DAMN DUDE HOW YOU SO BAD
-                //DAMN NP YO WE GON GET UP TOMORROW AND DO THIS AGAIN
-                for (int k = 0; k < 10; k++)
-                {
-                    //checking if the question number has already been selected
-                    if(!(chosenAlready[k] == n))
-                    {
-                        //first storing question with options and answer in array
-                        chosenQuestions[i] = bank[n];
-                        //storing randomly selected question number in array to prevent same question appearing twice
-                        chosenAlready[i] = n;
-                    }
-                }
+                    Random rand = new Random();
+                    int n = rand.nextInt(bank.length) + 1;
+
+
+                           try
+                           {
+
+                               String question = bank[n].getQuestion();
+                               String option1 = bank[n].getOption1();
+                               String option2 = bank[n].getOption2();
+                               String option3 = bank[n].getOption3();
+                               String option4 = bank[n].getOption4();
+                               String answer = bank[n].getAnswer();
+
+                               chosenQuestions[i] = new question(question, option1, option2, option3, option4, answer);
+                               chosenAlready[i] = n;
+
+                               System.out.println(question);
+
+
+
+                           } catch (NullPointerException e) { }
 
             }
         }
 }
+
+
