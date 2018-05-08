@@ -8,8 +8,6 @@ import java.util.regex.Pattern;
 public class Main {
 
     public static Scanner s = new Scanner(System.in);
-//    public static Scanner q = new Scanner(System.in).useDelimiter(Pattern.compile("^\\s*$", Pattern.MULTILINE));
-//    public static Scanner qs = new Scanner (new File("Testbank.txt")).useDelimiter((Pattern.compile(("^\\s*$", Pattern.MULTILINE))));
 
     public static void main(String[] args)
     {
@@ -29,7 +27,7 @@ public class Main {
         student[] stud = new student[5];
         question[] bank = new question[95];
 
-
+        //reading questions from question bank
         for (int i = 0; i < bank.length; i++)
         {
                 String question = qs.next();
@@ -57,6 +55,10 @@ public class Main {
         System.out.println("Welcome to the online test system.");
         login(stud);
 
+        menu();
+
+
+
         }
 
         private static void login(student[] stud)
@@ -74,6 +76,7 @@ public class Main {
             password = s.nextLine();
 
             boolean isValid = verifyLogin(name,password,stud);
+
             while (!isValid)
             {
                 System.out.println("Incorrect login, please try again.");
@@ -84,8 +87,7 @@ public class Main {
                 System.out.println("Password: ");
                 password = s.nextLine();
 
-                verifyLogin(name,password,stud);
-
+                isValid = verifyLogin(name,password,stud);
             }
 
         }
@@ -97,10 +99,14 @@ public class Main {
                 if (username.equals(s[i].getName()) && password.equals(s[i].getPassword()))
                 {
                     System.out.println("Successful login!");
-                    //invoke other shit now
                     return true;
                 }
             }
             return false;
+        }
+
+        private static void menu()
+        {
+
         }
 }
