@@ -9,7 +9,7 @@ import java.util.Random;
 public class Main {
 
     public static student[] stud = new student[5];
-    public static question[] bank = new question[95];
+    public static question[] bank = new question[90];
 
     public static Scanner scanner = new Scanner(System.in);
 
@@ -168,9 +168,12 @@ public class Main {
         //function invoked from choosing menu option 4
         private static void menuExit() { System.exit(0); }
 
+        
+
         private static void menuTest()
         {
             question[] chosenQuestions = new question[10];
+            boolean flag = false;
 
             //array to store the question number so same question doesn't appear twice
             int[] chosenAlready = new int[10];
@@ -178,30 +181,37 @@ public class Main {
             for (int i = 0; i < chosenQuestions.length; i++)
             {
                 //selecting random number to refer in question bank
-
-
                     Random rand = new Random();
                     int n = rand.nextInt(bank.length) + 1;
 
+                //checking if random number generated has already been generated before
+                for (int k = 0; k < chosenAlready.length; k++)
+                {
+                    if (chosenAlready[k] == n){flag = true;}
+                }
 
-                           try
-                           {
+                        if (flag) {}
 
-                               String question = bank[n].getQuestion();
-                               String option1 = bank[n].getOption1();
-                               String option2 = bank[n].getOption2();
-                               String option3 = bank[n].getOption3();
-                               String option4 = bank[n].getOption4();
-                               String answer = bank[n].getAnswer();
+                        else
+                        {
 
-                               chosenQuestions[i] = new question(question, option1, option2, option3, option4, answer);
-                               chosenAlready[i] = n;
+                            try {
 
-                               System.out.println(question);
+                                String question = bank[n].getQuestion();
+                                String option1 = bank[n].getOption1();
+                                String option2 = bank[n].getOption2();
+                                String option3 = bank[n].getOption3();
+                                String option4 = bank[n].getOption4();
+                                String answer = bank[n].getAnswer();
+
+                                chosenQuestions[i] = new question(question, option1, option2, option3, option4, answer);
+                                chosenAlready[i] = n;
+
+                                System.out.println(question);
 
 
-
-                           } catch (NullPointerException e) { }
+                            } catch (NullPointerException e) { }
+                        }
 
             }
         }
