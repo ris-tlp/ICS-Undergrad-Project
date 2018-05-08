@@ -14,12 +14,6 @@ public class Main {
     public static void main(String[] args)
     {
 
-//        String filepath = "C:\\workspace\\ICS-Undergrad-Project\\userbase.txt";
-//        Scanner scan = new Scanner(new File("userbase.txt"));
-
-//        File file = new File("C:\\workspace\\ICS-Undergrad-Project\\userbase.txt");
-//        Scanner scan = new Scanner(file);
-
         Scanner scan = null;
         try
         {
@@ -51,7 +45,6 @@ public class Main {
         //reading students from userbase
         for (int i = 0; i < stud.length; i++)
          {
-
                int ID = scan.nextInt();
                String name = scan.next();
                String password = scan.next();
@@ -59,8 +52,6 @@ public class Main {
                int attempts = scan.nextInt();
 
             stud[i] = new student(ID, name, password, max, attempts);
-//            System.out.println(scan.nextLine());
-
          }
 
         System.out.println("Welcome to the online test system.");
@@ -83,7 +74,7 @@ public class Main {
             password = s.nextLine();
 
             boolean isValid = verifyLogin(name,password,stud);
-            while (isValid == false)
+            while (!isValid)
             {
                 System.out.println("Incorrect login, please try again.");
 
