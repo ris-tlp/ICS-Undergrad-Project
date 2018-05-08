@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class Main {
 
-    public static Scanner s = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args)
     {
@@ -70,10 +70,10 @@ public class Main {
             System.out.println("Please enter your name and your password.");
 
             System.out.println("Name: ");
-            name = s.nextLine();
+            name = scanner.nextLine();
 
             System.out.println("Password: ");
-            password = s.nextLine();
+            password = scanner.nextLine();
 
             boolean isValid = verifyLogin(name,password,stud);
 
@@ -82,10 +82,10 @@ public class Main {
                 System.out.println("Incorrect login, please try again.");
 
                 System.out.println("Name: ");
-                name = s.nextLine();
+                name = scanner.nextLine();
 
                 System.out.println("Password: ");
-                password = s.nextLine();
+                password = scanner.nextLine();
 
                 isValid = verifyLogin(name,password,stud);
             }
@@ -107,6 +107,45 @@ public class Main {
 
         private static void menu()
         {
+            System.out.println("Welcome to the Online Test System...");
+
+            System.out.println("Please enter the number of choice you want to select from the following menu: ");
+            System.out.println("1. Take a test");
+            System.out.println("2. View leaderboard");
+            System.out.println("3. View my profile");
+            System.out.println("4. Exit");
+
+            int choice = scanner.nextInt();
+
+            switch(choice)
+            {
+                case 1:
+                    System.out.println("You have chosen to take a test.");
+                    //call test function
+                    break;
+
+                case 2:
+                    System.out.println("You have chosen to view the leaderboard.");
+                    //call leaderboard function
+                    break;
+
+                case 3:
+                    System.out.println("You have chosen to view your profile.");
+                    //call profile function
+                    break;
+
+                case 4:
+                    System.out.println("You have chosen to exit.");
+                    //call exit function
+                    break;
+
+                default:
+                    System.out.println("You have not entered a valid choice, please try again.");
+                    //add validity check for wrong input
+
+            }
+
+
 
         }
 }
