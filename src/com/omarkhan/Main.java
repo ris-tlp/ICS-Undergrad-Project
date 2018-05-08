@@ -57,7 +57,7 @@ public class Main {
 
         menu();
 
-        
+
 
 
         }
@@ -117,6 +117,7 @@ public class Main {
             System.out.println("4. Exit");
 
             int choice = scanner.nextInt();
+            boolean isValid;
 
             switch(choice)
             {
@@ -142,11 +143,23 @@ public class Main {
 
                 default:
                     System.out.println("You have not entered a valid choice, please try again.");
-                    //add validity check for wrong input
+                    isValid = false;
+                    isValid = menuValidity(isValid);
 
             }
 
 
 
+        }
+
+        private static boolean menuValidity(boolean flag)
+        {
+            while (!flag)
+            {
+                menu();
+                return false;
+            }
+
+            return true;
         }
 }
