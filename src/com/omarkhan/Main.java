@@ -138,7 +138,7 @@ public class Main {
 
                 case 4:
                     System.out.println("You have chosen to exit.");
-                    //call exit function
+                    menuExit();
                     break;
 
                 default:
@@ -154,12 +154,12 @@ public class Main {
 
         private static boolean menuValidity(boolean flag)
         {
-            while (!flag)
-            {
+            while (!flag) {
                 menu();
                 return false;
             }
-
             return true;
         }
+
+        private static void menuExit() { System.exit(0); }
 }
