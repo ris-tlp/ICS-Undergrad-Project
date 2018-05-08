@@ -17,9 +17,7 @@ public class student {
         this.attempts = attempts;
     }
 
-    public int getID() {
-        return ID;
-    }
+    public int getID() { return ID; }
 
     public String getName() {
         return name;

@@ -2,12 +2,14 @@ package com.omarkhan;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
+import java.util.regex.Pattern;
 
 
 public class Main {
 
     public static Scanner s = new Scanner(System.in);
+//    public static Scanner q = new Scanner(System.in).useDelimiter(Pattern.compile("^\\s*$", Pattern.MULTILINE));
+//    public static Scanner qs = new Scanner (new File("Testbank.txt")).useDelimiter((Pattern.compile(("^\\s*$", Pattern.MULTILINE))));
 
     public static void main(String[] args)
     {
@@ -19,35 +21,54 @@ public class Main {
 //        Scanner scan = new Scanner(file);
 
         Scanner scan = null;
-        try {
+        try
+        {
             scan = new Scanner (new File("userbase.txt"));
+        } catch(FileNotFoundException e) {}
 
-
-        } catch(FileNotFoundException e) {
-        }
+        Scanner qs = null;
+        try
+        {
+            qs = new Scanner (new File("Testbank.txt")).useDelimiter((Pattern.compile(("^\\s*$"), Pattern.MULTILINE)));
+        } catch (FileNotFoundException e) {}
 
         student[] stud = new student[5];
+        question[] bank = new question[95];
 
-        for(int i = 0; i < stud.length; i++)
+
+        for (int i = 0; i < bank.length; i++)
         {
-            int ID = scan.nextInt();
-            String name = scan.next();
-            String password = scan.next();
-            int max = scan.nextInt();
-            int attempts = scan.nextInt();
+                String question = qs.next();
+                String option1 = qs.next();
+                String option2 = qs.next();
+                String option3 = qs.next();
+                String option4 = qs.next();
+                String answer = qs.next();
 
+                bank[i] = new question(question,option1,option2,option3,option4,answer);
+
+        }
+        //reading students from userbase
+        for (int i = 0; i < stud.length; i++)
+         {
+
+               int ID = scan.nextInt();
+               String name = scan.next();
+               String password = scan.next();
+               int max = scan.nextInt();
+               int attempts = scan.nextInt();
 
             stud[i] = new student(ID, name, password, max, attempts);
 //            System.out.println(scan.nextLine());
 
-        }
+         }
 
         System.out.println("Welcome to the online test system.");
         login(stud);
 
         }
 
-        private static void login(student[] stewd)
+        private static void login(student[] stud)
         {
 
             String name;
@@ -61,7 +82,7 @@ public class Main {
             System.out.println("Password: ");
             password = s.nextLine();
 
-            boolean isValid = verifyLogin(name,password,stewd);
+            boolean isValid = verifyLogin(name,password,stud);
             while (isValid == false)
             {
                 System.out.println("Incorrect login, please try again.");
@@ -72,7 +93,7 @@ public class Main {
                 System.out.println("Password: ");
                 password = s.nextLine();
 
-                verifyLogin(name,password,stewd);
+                verifyLogin(name,password,stud);
 
             }
 
