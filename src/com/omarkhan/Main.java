@@ -162,7 +162,7 @@ public class Main {
 
         //array to store the question number so same question doesn't appear twice
         int[] chosenAlready = new int[10];
-        char[] answersInput = new char[10];
+        String[] answersInput = new String[10];
 
         for (int i = 0; i < chosenQuestions.length; i++)
         {
@@ -205,10 +205,12 @@ public class Main {
         test(chosenQuestions,answersInput);
 
 
+
+
     }
 
 
-    public static void test(question[] chosenQuestions, char[] answersInput)
+    public static void test(question[] chosenQuestions, String[] answersInput)
     {
 
 
@@ -216,17 +218,38 @@ public class Main {
         {
            try
            {
-               System.out.println(chosenQuestions[i].getQuestion());
-               System.out.println(chosenQuestions[i].getOption1());
-               System.out.println(chosenQuestions[i].getOption2());
-               System.out.println(chosenQuestions[i].getOption3());
-               System.out.println(chosenQuestions[i].getOption4());
+               System.out.println(i + " " + chosenQuestions[i].getQuestion());
+               System.out.println("A " + chosenQuestions[i].getOption1());
+               System.out.println("B " + chosenQuestions[i].getOption2());
+               System.out.println("C " +chosenQuestions[i].getOption3());
+               System.out.println("D " +chosenQuestions[i].getOption4());
 
-               answersInput[i] = scanner.next(".").charAt(0);
+               answersInput[i] = scanner.nextLine();
 
            } catch (NullPointerException e) {}
 
         }
+
+       int marks = checkAnswers(chosenQuestions,answersInput);
+        System.out.println(" ******************************YOUR MARKS ARE: " + marks);
+    }
+
+    public static int checkAnswers(question[] chosenQuestions, String[] answersInput)
+    {
+        int marks = 0;
+
+        for (int i = 0; i < answersInput.length; i++)
+        {
+            try {
+                if (chosenQuestions[i].getAnswer() == answersInput[i].toUpperCase())
+                    {
+                        marks++;
+                    }
+
+            } catch (NullPointerException e) {}
+        }
+
+        return marks;
     }
 
 }
