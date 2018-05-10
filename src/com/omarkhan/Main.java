@@ -218,11 +218,11 @@ public class Main {
         {
            try
            {
-               System.out.println(i + " " + chosenQuestions[i].getQuestion());
-               System.out.println("A " + chosenQuestions[i].getOption1());
-               System.out.println("B " + chosenQuestions[i].getOption2());
-               System.out.println("C " +chosenQuestions[i].getOption3());
-               System.out.println("D " +chosenQuestions[i].getOption4());
+               System.out.println(chosenQuestions[i].getQuestion());
+               System.out.println(chosenQuestions[i].getOption1());
+               System.out.println(chosenQuestions[i].getOption2());
+               System.out.println(chosenQuestions[i].getOption3());
+               System.out.println(chosenQuestions[i].getOption4());
 
                answersInput[i] = scanner.nextLine();
 
