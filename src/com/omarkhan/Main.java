@@ -218,13 +218,14 @@ public class Main {
         {
            try
            {
+               
                System.out.println(chosenQuestions[i].getQuestion());
                System.out.println(chosenQuestions[i].getOption1());
                System.out.println(chosenQuestions[i].getOption2());
                System.out.println(chosenQuestions[i].getOption3());
                System.out.println(chosenQuestions[i].getOption4());
 
-               answersInput[i] = scanner.nextLine();
+               answersInput[i] = scanner.next();
 
            } catch (NullPointerException e) {}
 
