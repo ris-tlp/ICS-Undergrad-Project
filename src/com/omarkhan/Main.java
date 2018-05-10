@@ -247,7 +247,7 @@ public class Main {
         }
 
         int marks = checkAnswers(chosenQuestions, answersInput);
-        System.out.println(" ******************************YOUR MARKS ARE: " + marks);
+//        System.out.println(" ******************************YOUR MARKS ARE: " + marks);
     }
 
     public static int checkAnswers(question[] chosenQuestions, String[] answersInput) {
@@ -332,13 +332,7 @@ public class Main {
 
                     bError = false;
 
-
-//                } catch (Exception e) {
-//                    System.out.println("Error! Redirecting you to the main menu!");
-
                 }
-
-
 
         }
     }
