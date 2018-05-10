@@ -18,6 +18,8 @@ public class Main {
 
     public static void main(String[] args) {
 
+
+
         Scanner scan = null;
         try {
             scan = new Scanner(new File("userbase.txt"));
@@ -103,7 +105,6 @@ public class Main {
     }
 
     private static void menu() {
-        System.out.println("Welcome to the Online Test System...");
 
         System.out.println("Please enter the number of choice you want to select from the following menu: ");
         System.out.println("1. Take a test");
@@ -111,35 +112,51 @@ public class Main {
         System.out.println("3. View my profile");
         System.out.println("4. Exit");
 
-        int choice = scanner.nextInt();
-        boolean isValid;
 
-        switch (choice) {
-            case 1:
-                System.out.println("You have chosen to take a test.");
-                menuTest();
-                break;
+        boolean isValidInput = true;
+        int choice;
 
-            case 2:
-                System.out.println("You have chosen to view the leaderboard.");
-                //call leaderboard function
-                break;
+        while(isValidInput)
+        {
+            if(scanner.hasNextInt())
+                choice = scanner.nextInt();
+            else
+                {
+                    scanner.next();
+                    System.out.println("Invalid input, please try again.");
+                    continue;
+                }
 
-            case 3:
-                System.out.println("You have chosen to view your profile.");
-                viewProfile(publicName);
-                break;
+            switch (choice)
+            {
+                case 1:
+                    System.out.println("You have chosen to take a test.");
+                    menuTest();
+                    break;
 
-            case 4:
-                System.out.println("You have chosen to exit.");
-                menuExit();
-                break;
+                case 2:
+                    System.out.println("You have chosen to view the leaderboard.");
+                    //call leaderboard function
+                    break;
 
-            default:
-                System.out.println("You have not entered a valid choice, please try again.");
-                isValid = false;
-                isValid = menuValidity(isValid);
+                case 3:
+                    System.out.println("You have chosen to view your profile.");
+                    viewProfile(publicName);
+                    break;
 
+                case 4:
+                    System.out.println("You have chosen to exit.");
+                    menuExit();
+                    break;
+
+                default:
+                    System.out.println("You have not entered a valid choice, please try again.");
+                    isValidInput = false;
+                    isValidInput = menuValidity(isValidInput);
+
+
+            }
+            isValidInput = false;
         }
 
 
