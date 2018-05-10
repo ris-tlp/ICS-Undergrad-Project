@@ -1,12 +1,15 @@
 package com.omarkhan;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.Random;
 
 
 public class Main {
+
+    public static String publicName;
 
     public static student[] stud = new student[5];
     public static question[] bank = new question[90];
@@ -36,8 +39,9 @@ public class Main {
             String option3 = qs.next();
             String option4 = qs.next();
             String answer = qs.next();
+            String newAnswer = answer.replaceAll("\\s+", "");
 
-            bank[i] = new question(question, option1, option2, option3, option4, answer);
+            bank[i] = new question(question, option1, option2, option3, option4, newAnswer);
 
         }
         //reading students from userbase
@@ -61,29 +65,29 @@ public class Main {
 
     private static void login(student[] stud) {
 
-        String name;
+
         String password;
 
         System.out.println("Please enter your name and your password.");
 
         System.out.println("Name: ");
-        name = scanner.nextLine();
+        publicName = scanner.nextLine();
 
         System.out.println("Password: ");
         password = scanner.nextLine();
 
-        boolean isValid = verifyLogin(name, password, stud);
+        boolean isValid = verifyLogin(publicName, password, stud);
 
         while (!isValid) {
             System.out.println("Incorrect login, please try again.");
 
             System.out.println("Name: ");
-            name = scanner.nextLine();
+            publicName = scanner.nextLine();
 
             System.out.println("Password: ");
             password = scanner.nextLine();
 
-            isValid = verifyLogin(name, password, stud);
+            isValid = verifyLogin(publicName, password, stud);
         }
 
     }
@@ -123,7 +127,7 @@ public class Main {
 
             case 3:
                 System.out.println("You have chosen to view your profile.");
-                //call profile function
+                viewProfile(publicName);
                 break;
 
             case 4:
@@ -164,27 +168,22 @@ public class Main {
         int[] chosenAlready = new int[10];
         String[] answersInput = new String[10];
 
-        for (int i = 0; i < chosenQuestions.length; i++)
-        {
+        for (int i = 0; i < chosenQuestions.length; i++) {
             //selecting random number to refer in question bank
             Random rand = new Random();
             int n = rand.nextInt(bank.length) + 1;
 
             //checking if random number generated has already been generated before
-            for (int k = 0; k < chosenAlready.length; k++)
-            {
+            for (int k = 0; k < chosenAlready.length; k++) {
                 if (chosenAlready[k] == n) {
                     flag = true;
                 }
             }
 
-            if (flag) { }
+            if (flag) {
+            } else {
 
-            else
-            {
-
-                try
-                {
+                try {
 
                     String question = bank[n].getQuestion();
                     String option1 = bank[n].getOption1();
@@ -196,63 +195,136 @@ public class Main {
                     chosenQuestions[i] = new question(question, option1, option2, option3, option4, answer);
                     chosenAlready[i] = n;
 
+                    System.out.println("******************************" + answer);
 
-                } catch (NullPointerException e) { }
+
+                } catch (NullPointerException e) {
+                }
             }
 
         }
 
-        test(chosenQuestions,answersInput);
-
-
+        test(chosenQuestions, answersInput);
 
 
     }
 
 
-    public static void test(question[] chosenQuestions, String[] answersInput)
-    {
+    public static void test(question[] chosenQuestions, String[] answersInput) {
 
 
-        for (int i = 0; i < chosenQuestions.length; i++)
-        {
-           try
-           {
-               
-               System.out.println(chosenQuestions[i].getQuestion());
-               System.out.println(chosenQuestions[i].getOption1());
-               System.out.println(chosenQuestions[i].getOption2());
-               System.out.println(chosenQuestions[i].getOption3());
-               System.out.println(chosenQuestions[i].getOption4());
+        for (int i = 0; i < chosenQuestions.length; i++) {
+            try {
 
-               answersInput[i] = scanner.next();
+                System.out.println(chosenQuestions[i].getQuestion());
+                System.out.println(chosenQuestions[i].getOption1());
+                System.out.println(chosenQuestions[i].getOption2());
+                System.out.println(chosenQuestions[i].getOption3());
+                System.out.println(chosenQuestions[i].getOption4());
 
-           } catch (NullPointerException e) {}
+                answersInput[i] = scanner.next();
+
+            } catch (NullPointerException e) {
+            }
 
         }
 
-       int marks = checkAnswers(chosenQuestions,answersInput);
+        int marks = checkAnswers(chosenQuestions, answersInput);
         System.out.println(" ******************************YOUR MARKS ARE: " + marks);
     }
 
-    public static int checkAnswers(question[] chosenQuestions, String[] answersInput)
-    {
+    public static int checkAnswers(question[] chosenQuestions, String[] answersInput) {
         int marks = 0;
 
-        for (int i = 0; i < answersInput.length; i++)
-        {
-            try {
-                if (chosenQuestions[i].getAnswer() == answersInput[i].toUpperCase())
-                    {
-                        marks++;
-                    }
+        for (int i = 0; i < answersInput.length; i++) {
 
-            } catch (NullPointerException e) {}
+            try {
+                if (chosenQuestions[i].getAnswer().equals(answersInput[i].toUpperCase())) {
+                    marks++;
+                }
+
+            } catch (NullPointerException e) {
+            }
         }
 
         return marks;
     }
 
-}
+
+    public static void viewProfile(String name)
+        {
+            boolean flag = false;
+            int choice = 0;
+
+            for (int i = 0; i < Integer.MAX_VALUE; i++)
+            {
+                if (stud[i].getName().equals(publicName)) {
+                    System.out.println("Your ID is: " + stud[i].getID());
+                    System.out.println("Your name is: " + stud[i].getName());
+                    System.out.println("Your highest score is: " + stud[i].getHighestScore());
+                    System.out.println("You have taken this test " + stud[i].getAttempts() + " times.");
+
+                    flag = true;
+                }
+
+                if (flag) {
+                    break;
+                }
+
+            }
+
+            System.out.println("\n\nWhat would you like to do next?");
+            System.out.println("Enter 1 to go back to the main menu.");
+            System.out.println("Enter 2 to exit the program.");
+
+
+//           try { choice = scanner.nextInt(); } catch (InputMismatchException e) {}
+            boolean bError = true;
+
+
+
+
+//                try {
+                while (bError)
+                {
+                    if (scanner.hasNextInt())
+                         choice = scanner.nextInt();
+                    else
+                        {
+                         scanner.next();
+                            System.out.println("Invalid input, please try again.");
+                         continue;
+
+                        }
+
+                    switch (choice) {
+                        case 1:
+                            menu();
+                            break;
+
+                        case 2:
+                            menuExit();
+                            break;
+
+                        default:
+                            System.out.println("You have entered an incorrect input, automatically redirecting you to the main menu.\n");
+                            menu();
+
+
+                    }
+
+                    bError = false;
+
+
+//                } catch (Exception e) {
+//                    System.out.println("Error! Redirecting you to the main menu!");
+
+                }
+
+
+
+        }
+    }
+
 
 
